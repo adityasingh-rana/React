@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
 
-function App() {
+function LudoBoard() {
   let [moves, setMoves] = useState({
     blue: 0,
     red: 0,
@@ -47,4 +46,4 @@ function App() {
   )
 }
 
-export default App
+export default LudoBoard;
