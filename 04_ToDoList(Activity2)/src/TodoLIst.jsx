@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function TodoList() {
 
-  let [todos,setTodos]=useState([{ task: "Sample Task", id: uuidv4()}]);
+  let [todos,setTodos]=useState([{ task: "Sample Task", id: uuidv4(), isDone: false }]);
   let [newTodo,setNewTodo]=useState("");
 
   let deleteTask = (id) => {
@@ -23,24 +23,24 @@ export default function TodoList() {
     setNewTodo(event.target.value);
   }
 
-  let upperCase = () => {
+  let isDoneAll = () => {
     setTodos((prevTodos) => (prevTodos.map(
       (todo) => {
         return {
           ...todo,
-          task: todo.task.toUpperCase()
+          isDone: true,
         }
       }
     )));
   }
 
-  let upperCaseSingle = (id) => {
+  let isDoneSingle = (id) => {
     setTodos((prevTodos) => (prevTodos.map(
       (todo) => {
         if(todo.id === id){
           return {
             ...todo,
-            task: todo.task.toUpperCase()
+            isDone: true,
           }
         }else{
           return todo;
@@ -55,28 +55,28 @@ export default function TodoList() {
           if(event.key==="Enter"){
             Add();
           }
-        }}/> &nbsp; <button onClick={Add} style={{backgroundColor: "green"}}>Add</button>
+        }}/> &nbsp; <button onClick={Add} style={{backgroundColor: "yellow", color: "black"}}>Add</button>
       </div>
       <div className="todoList" >
         <h3>
           You have to do following tasks:
         </h3>
-        <div className="tasks" style={{marginTop: "20px", height: "300px", overflowY: "scroll", backgroundColor: "rgba(255,255,155,0.3)", padding: "10px", borderRadius: "5px", color: "black",}}>
+        <div className="tasks" style={{marginTop: "20px", height: "300px", overflowY: "scroll", backgroundColor: "rgba(255,255,255,0.3)", padding: "10px", borderRadius: "5px", color: "black",}}>
         <ul>
           {
             todos.map((todo)=>(
               <>
-              <li key={todo.id}>
-                {todo.task} &nbsp;
+              <li key={todo.id} >
+                <span style={{textDecoration: todo.isDone ? "line-through" : "none",textDecorationColor: todo.isDone ? "#FF69B4": "none", fontWeight: todo.isDone ? "bold" : "normal",}}>{todo.task}</span> &nbsp;
                 <button style={{backgroundColor: "red",}} onClick={() => deleteTask(todo.id)} >Delete</button> &nbsp;
-                <button style={{backgroundColor: "orange", color: "black"}} onClick={() => upperCaseSingle(todo.id)}>Show In Uppercase</button>
+                <button style={{backgroundColor: "green", color: "white"}} onClick={() => isDoneSingle(todo.id)}>Done</button>
               </li><br/>
               </>
             ))
           }
         </ul></div>
       </div><br/>
-        <button onClick={upperCase} style={{backgroundColor: "yellow", color: "black"}}>UpperCase All</button>
+        <button onClick={isDoneAll} style={{backgroundColor: "orange", color: "white"}}>Done All</button>
     </>
   );
 }
