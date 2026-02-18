@@ -1,4 +1,4 @@
-import {CounterContext} from './context/Counter';
+import {CounterContext} from '../context/Counter';
 import {useContext} from 'react';
 
 function Counter() {
