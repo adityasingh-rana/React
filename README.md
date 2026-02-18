@@ -27,7 +27,6 @@ Each folder is a separate exercise or mini-project. Run the one you want locally
 - `12-miniContext` — mini context API demo  
 - `13-contextApi-practice` — additional Context API practice
 
-> Note: Folder names are taken from the repository index. If you add more folders, update this list.
 
 ---
 
