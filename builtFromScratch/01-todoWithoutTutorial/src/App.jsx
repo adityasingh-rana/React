@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
 import { useState } from 'react'
+import './App.css';
 
 function App() {
   const [todos,setTodos] = useState(() => {
@@ -40,8 +41,10 @@ function App() {
   }
 
   return (
-    <div>
+    <div className = "main-box">
+    <div className = 'todo-container'>
       <TodoInput onAdd = {handleAddInput} />
+    </div>
       <TodoList
         todos= {todos}
         onDelete = {handleDelete}

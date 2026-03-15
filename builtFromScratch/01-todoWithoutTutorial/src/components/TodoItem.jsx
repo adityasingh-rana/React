@@ -1,10 +1,12 @@
 import React from 'react'
+import '../App.css';
 
 function TodoItem({todo,onDelete,toggleCheck}) {
 
   return (
     <>
-      <li >
+      <div className={`todo-item ${todo.completed ? "completed" : ""}`} >
+        <div className = 'task-left'>
         <input type="checkbox" onChange={() => toggleCheck(todo.id)} checked = {todo.completed}/> &nbsp;
         <span className = {
           todo.completed === true ? "line-through" : ""
@@ -12,10 +14,12 @@ function TodoItem({todo,onDelete,toggleCheck}) {
         {todo.text} &nbsp;
 
         </span>
-      <button className='border-1 border-black m-2'
+        </div>
+      <button
       onClick={() => onDelete(todo.id)}
-      >Delete</button>
-      </li>
+      className = "delete-btn"
+      > ❌</button>
+      </div>
     </>
   )
 }

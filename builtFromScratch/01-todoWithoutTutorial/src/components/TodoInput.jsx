@@ -11,11 +11,12 @@ function TodoInput({onAdd}) {
     setInputval("");
   }
   return (
-    <div>
-      <input type="text" className='border-4 border-black'
+    <div className = "todo-input">
+      <input type="text"
        value={inputVal}
        onChange={handleInput}
-      />
+       placeholder = "Add a new task..."
+      />&nbsp;
       <button className='border-4 border-black' onClick={addTask}>ADD</button>
     </div>
   )
