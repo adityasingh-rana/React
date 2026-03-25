@@ -5,6 +5,8 @@ import { useState } from 'react'
 import './App.css';
 
 function App() {
+  const [editId,setEditId] = useState(null);
+  const [inputVal,setInputval] = useState("");
   const [todos,setTodos] = useState(() => {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : []
@@ -14,15 +16,35 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   },[todos]);
 
+  const handleInput = (e) => {
+    setInputval(e.target.value)
+  }
+  const addTask = () => {
+    handleAddInput(inputVal);
+    setInputval("");
+  }
+  const updateTask = () => {
+    const updateTodos = todos.map((todo) => {
+      return (todo.id === editId) ? {... todo, text: inputVal} : todo
+    });
+    setTodos(updateTodos);
+    setInputval("");
+    setEditId(null);
+  }
+  const handleKeydown = (e) => {
+    if(e.key === "Enter") addTask(inputVal);
+    if (editId != null && e.key === "Enter") updateTask();
+  }
+
+
   const handleAddInput = (text) => {
-    const newTodo = {
+      const newTodo = {
       id: Date.now(),
       text: text,
       completed: false,
     }
     setTodos(prev => [... prev,newTodo]);
   }
-
 
   const handleDelete = (id) => {
     {
@@ -40,15 +62,40 @@ function App() {
       ))
   }
 
+  const handleEdit = (id) => {
+    todos.map((todo) => {
+      if(todo.id == id) {
+        setInputval(todo.text);
+        setEditId(id);
+      }
+    })
+  }
+
+  const onClick = ( ) => {
+    if(editId == null){
+      addTask();
+    }else{
+      updateTask();
+    }
+  }
+
   return (
     <div className = "main-box">
     <div className = 'todo-container'>
-      <TodoInput onAdd = {handleAddInput} />
+      <TodoInput
+        editId = {editId}
+        handleClick = {onClick}
+        onChange = {handleInput}
+        onKeyDown = {handleKeydown}
+        value = {inputVal}
+      />
     </div>
       <TodoList
         todos= {todos}
         onDelete = {handleDelete}
+        onEdit = {handleEdit}
         toggleCheck = {handleToggle}
+        editId = {editId}
       />
     </div>
   )

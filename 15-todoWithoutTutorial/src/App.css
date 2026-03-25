@@ -261,3 +261,11 @@ body::after{
   .todo-item{ font-size:14px; padding:10px; }
   .app-title{ font-size:18px; }
 }
+
+#editBtn:hover {
+  background-color: rgba(255,255,255,0.5);
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  padding-top: 3px;
+}
