@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../App.css';
 import EditIcon from './EditIcon';
+import TodoContext from '../context/TodoContext';
 
-function TodoItem({ todo, onDelete, toggleCheck, onEdit, editId}) {
+function TodoItem({todo}) {
+  const storedValues = useContext(TodoContext);
+  const {onDelete} = storedValues;
+  const {toggleCheck} = storedValues;
+  const {onEdit} = storedValues;
+  const {editId} = storedValues;
 
   return (
     <>
